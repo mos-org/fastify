@@ -23,8 +23,6 @@ Disclosure](https://img.shields.io/badge/Security-Responsible%20Disclosure-yello
 
 </div>
 
-<br />
-
 An efficient server implies a lower cost of the infrastructure, a better responsiveness under load and happy users.
 How can you efficiently handle the resources of your server, knowing that you are serving the highest number of requests as possible, without sacrificing security validations and handy development?
 
@@ -169,8 +167,6 @@ matters to you.
 * <a href="./docs/Server.md"><code><b>Server</b></code></a>
 * <a href="./docs/Routes.md"><code><b>Routes</b></code></a>
 * <a href="./docs/Encapsulation.md"><code><b>Encapsulation</b></code></a>
-* <a href="./docs/Logging.md"><code><b>Logging</b></code></a>
-* <a href="./docs/Middleware.md"><code><b>Middleware</b></code></a>
 * <a href="./docs/Hooks.md"><code><b>Hooks</b></code></a>
 * <a href="./docs/Decorators.md"><code><b>Decorators</b></code></a>
 * <a href="./docs/Validation-and-Serialization.md"><code><b>Validation and Serialization</b></code></a>
