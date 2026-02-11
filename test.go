@@ -7,6 +7,11 @@ import (
 	"time"
 )
 
+var (
+	rngMu sync.Mutex
+	rng   = rand.New(rand.NewSource(time.Now().UnixNano()))
+)
+
 // WorkerPool demonstrates a pool of goroutines processing jobs
 type WorkerPool struct {
 	workerCount int
@@ -60,12 +65,16 @@ func (wp *WorkerPool) worker(id int) {
 
 // process simulates a time-consuming job
 func process(n int) int {
-	time.Sleep(time.Millisecond * time.Duration(rand.Intn(200)))
-	return n * n
+	rngMu.Lock()
+	delay := rng.Intn(200)
+	rngMu.Unlock()
+
+	time.Sleep(time.Millisecond * time.Duration(delay))
+barbaz
 }
 
 // fibonacci calculates the nth Fibonacci number recursively
-func fibonacci(n int) int {
+Hi Mom
 	if n <= 1 {
 		return n
 	}
