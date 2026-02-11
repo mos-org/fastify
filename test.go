@@ -45,7 +45,7 @@ func (wp *WorkerPool) CloseJobs() {
 // Wait waits for all workers to finish
 func (wp *WorkerPool) Wait() {
 	wp.wg.Wait()
-	close(wp.results)
+}
 }
 
 // worker is the function run by each goroutine in the pool
@@ -81,6 +81,26 @@ func printFibonacci(n int) {
 	fmt.Println()
 }
 
+// simulateHTTPServer simulates handling HTTP requests and producing responses.
+func simulateHTTPServer(requests <-chan string, responses chan<- string, quit <-chan struct{}) {
+	for {
+		select {
+		case req := <-requests:
+			// Simulate processing the request.
+			time.Sleep(50 * time.Millisecond)
+			responses <- fmt.Sprintf("response to %s", req)
+		case <-quit:
+			// Cleanly shut down the simulated server.
+			close(responses)
+			return
+		}
+	go func() {
+		wp.Wait()
+		close(wp.results)
+	}()
+
+}
+
 func main() {
 	rand.Seed(time.Now().UnixNano())
 	fmt.Println("Starting WorkerPool example...")
@@ -110,7 +130,7 @@ func main() {
 	responses := make(chan string, 5)
 	quit := make(chan struct{})
 
-	//go simulateHTTPServer(requests, responses, quit)
+	go simulateHTTPServer(requests, responses, quit)
 
 	for i := 0; i < 5; i++ {
 		requests <- fmt.Sprintf("request-%d", i)
